@@ -123,6 +123,13 @@
         <configuration>
           <mainClass>es.labjc.web.LabjcWebApplication</mainClass>
         </configuration>
+	<executions>
+    	 <execution>
+          <goals>
+           <goal>repackage</goal>
+         </goals>
+        </execution>
+       </executions>
       </plugin>
       
       <!-- Node/NPM + Tailwind -->
