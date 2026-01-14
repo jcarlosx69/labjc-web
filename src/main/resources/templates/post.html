@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${post.titulo}">Post</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body th:replace="~{layout/site :: layout(${post.titulo},'blog', ~{::section})}">
+<section class="container mx-auto px-4 py-8">
+    <article>
+        <header class="mb-6">
+            <h1 class="text-3xl font-bold" th:text="${post.titulo}">Título</h1>
+            <p class="text-sm text-gray-500"
+               th:text="${#temporals.format(post.fechaPublicacion, 'dd/MM/yyyy HH:mm')}">fecha</p>
+        </header>
+
+        <p class="text-lg text-gray-700 mb-6" th:text="${post.resumen}">Resumen…</p>
+
+        <pre class="whitespace-pre-wrap text-gray-800"
+             th:text="${post.contenidoMd}">Contenido…</pre>
+    </article>
+
+    <div class="mt-8">
+        <a class="text-blue-600 underline" th:href="@{/blog}">← Volver al blog</a>
+    </div>
+</section>
+</body>
+</html>

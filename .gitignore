@@ -1,0 +1,30 @@
+# Maven
+target/
+*.log
+
+# Java
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / frontend
+node_modules/
+dist/
+build/
+.cache/
+sync.ffs_db

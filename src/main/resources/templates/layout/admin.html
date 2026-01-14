@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pageTitle, active, content)">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title th:text="${pageTitle} ?: 'Panel de administración'">Panel de administración</title>
+  <link rel="icon" href="/favicon.ico"/>
+  <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body class="min-h-screen bg-white text-slate-900">
+  <!-- Barra superior -->
+  <header class="border-b bg-white/90 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center gap-3">
+      <div class="text-xl font-bold">Panel de administración</div>
+      <nav class="ml-auto flex gap-2">
+        <a href="/" class="px-3 py-2 rounded-2xl border">Ir a la web</a>
+        <a href="/admin/descargas" class="px-3 py-2 rounded-2xl border"
+           th:classappend="${active}=='descargas' ? 'bg-slate-100 font-semibold' : ''">Gestión de descargas</a>
+        <a href="/admin/posts" class="px-3 py-2 rounded-2xl border opacity-60 pointer-events-none" title="Próximamente">Gestión de posts</a>
+        <a href="/admin/proyectos" class="px-3 py-2 rounded-2xl border opacity-60 pointer-events-none" title="Próximamente">Gestión de proyectos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contenido -->
+  <main class="max-w-7xl mx-auto px-4 py-8 grid gap-8">
+    <th:block th:insert="${content}"/>
+  </main>
+
+  <footer class="border-t mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-sm text-slate-600">
+      Admin · <a href="/logout" class="hover:underline">Salir</a>
+    </div>
+  </footer>
+</body>
+</html>

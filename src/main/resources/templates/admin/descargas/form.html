@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><title th:text="${title} ?: 'Descarga'">Descarga</title></head>
+<body>
+<div th:replace="~{layout/admin :: layout(${title} ?: 'Descarga','descargas', ~{::section})}"></div>
+
+<section class="grid gap-6">
+  <h1 class="text-2xl font-semibold" th:text="${title}">Descarga</h1>
+
+  <form th:action="@{/admin/descargas/save}" method="post" th:object="${form}" class="grid gap-4 border rounded-2xl p-6">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    <label class="grid gap-1">
+      <span>Nombre</span>
+      <input class="border rounded p-2" th:field="*{nombre}" />
+      <small class="text-red-600" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+    </label>
+
+    <label class="grid gap-1">
+      <span>Ruta del archivo</span>
+      <input class="border rounded p-2" th:field="*{rutaArchivo}" placeholder="Ej: D:\descargas\utilidad.zip o /opt/descargas/utilidad.zip"/>
+      <small class="text-red-600" th:if="${#fields.hasErrors('rutaArchivo')}" th:errors="*{rutaArchivo}"></small>
+    </label>
+
+    <label class="grid gap-1">
+      <span>Checksum SHA-256 (opcional)</span>
+      <input class="border rounded p-2" th:field="*{checksumSha256}" placeholder="64 hex"/>
+      <small class="text-red-600" th:if="${#fields.hasErrors('checksumSha256')}" th:errors="*{checksumSha256}"></small>
+    </label>
+
+    <label class="inline-flex items-center gap-2">
+      <input type="checkbox" th:field="*{habilitado}"/><span>Habilitado</span>
+    </label>
+
+    <div class="flex gap-2">
+      <button class="border rounded px-4 py-2">Guardar</button>
+      <a class="border rounded px-4 py-2" href="/admin/descargas">Cancelar</a>
+    </div>
+  </form>
+</section>
+
+</body>
+</html>

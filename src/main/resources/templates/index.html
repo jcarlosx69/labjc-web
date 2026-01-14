@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head><title>Inicio</title></head>
+<body>
+<div th:replace="~{layout/site :: layout('Inicio','home', ~{::section})}"></div>
+
+<section class="grid gap-4">
+  <h1 class="text-3xl font-bold">¡Hola, Juan Carlos!</h1>
+  <p>Spring Boot + Thymeleaf funcionando.</p>
+</section>
+
+</body>
+</html>
