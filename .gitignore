@@ -1,36 +1,33 @@
-# Maven
+HELP.md
 target/
-*.log
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-# Java
-*.class
-
-# IntelliJ
-.idea/
-*.iml
-out/
-
-# VS Code
-.vscode/
-
-# Eclipse
-.project
+### STS ###
+.apt_generated
 .classpath
-.settings/
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# OS
-.DS_Store
-Thumbs.db
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-# Node / frontend
-node_modules/
-dist/
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 build/
-.cache/
-sync.ffs_db
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-# Frontend: no versionar runtime ni dependencias
-frontend/node/
-frontend/**/node_modules/
-*.exe
-*.cmd
+### VS Code ###
+.vscode/

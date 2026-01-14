@@ -1,198 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>es.labjc</groupId>
-  <artifactId>labjc-web</artifactId>
-  <version>1.0.0</version>
-  <packaging>jar</packaging>
-  
-  <name>labjc-web</name>
-  <description>Página personal de Juan Carlos (labjc.es)</description>
-  
-  <properties>
-    <java.version>17</java.version>
-    <spring.boot.version>3.3.5</spring.boot.version>
-    <!-- Fuerza compilación a Java 17 para poder automatizar desde el servidof. -->
-    <maven.compiler.release>17</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring.boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  
-  <dependencies>
-    <!-- Spring Boot base -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-mail</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    
-    <!-- Markdown -->
-    <dependency>
-      <groupId>org.commonmark</groupId>
-      <artifactId>commonmark</artifactId>
-      <version>0.22.0</version>
-    </dependency>
-    
-    <!-- Base de datos -->
-    <dependency>
-      <groupId>org.mariadb.jdbc</groupId>
-      <artifactId>mariadb-java-client</artifactId>
-    </dependency>
-    
-    <!-- Tests -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    
-    <!-- H2 para dev -->
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    
-    <!-- Migraciones -->
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-    </dependency>
-  </dependencies>
-  
-  <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.5.7</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>es.labjc</groupId>
+	<artifactId>labjc-web</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>labjc-web</name>
+	<description>Demo project for Spring Boot</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
+
+
+        <dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>test</scope>
+</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+	</dependencies>
+
+	<build>
     <plugins>
-      
-      <!-- Compilador Java 21 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <!-- usar 'release' evita incoherencias de -source/-target -->
-          <release>${maven.compiler.release}</release>
-          <compilerArgs>
-            <arg>-Xlint:deprecation</arg>
-            <arg>-Xlint:unchecked</arg>
-          </compilerArgs>
-        </configuration>
-      </plugin>
-      
-      <!-- Spring Boot -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring.boot.version}</version>
-        <configuration>
-          <mainClass>es.labjc.web.LabjcWebApplication</mainClass>
-        </configuration>
-	<executions>
-    	 <execution>
-          <goals>
-           <goal>repackage</goal>
-         </goals>
-        </execution>
-       </executions>
-      </plugin>
-      
-      <!-- Node/NPM + Tailwind -->
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.15.0</version>
-        <configuration>
-          <workingDirectory>frontend</workingDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>install-node-and-npm</id>
-            <goals><goal>install-node-and-npm</goal></goals>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
-              <nodeVersion>v20.14.0</nodeVersion>
-              <npmVersion>10.7.0</npmVersion>
+                <excludes>
+                    <exclude>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclude>
+                </excludes>
             </configuration>
-          </execution>
-          <execution>
-            <id>npm-ci</id>
-            <phase>generate-resources</phase>
-            <goals><goal>npm</goal></goals>
+        </plugin>
+        
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
             <configuration>
-              <arguments>ci</arguments>
+                <release>17</release>
             </configuration>
-          </execution>
-          <execution>
-            <id>npm-build</id>
-            <phase>generate-resources</phase>
-            <goals><goal>npm</goal></goals>
-            <configuration>
-              <arguments>run build</arguments>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      
-      <!-- Copiar el CSS generado al output del build -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
-        <executions>
-          <execution>
-            <id>copy-tailwind-css</id>
-            <phase>process-resources</phase>
-            <goals><goal>copy-resources</goal></goals>
-            <configuration>
-              <outputDirectory>${project.build.outputDirectory}/static/css</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${project.basedir}/frontend/dist</directory>
-                  <includes>
-                    <include>styles.css</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      
+        </plugin>
     </plugins>
-  </build>
+</build>
+
 </project>

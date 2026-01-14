@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:fragment="title">labjc.es</title>
+
+
+
+    <style th:fragment="style">
+        /* Cargamos Bootstrap 5 */
+        @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css");
+
+        /* --- BASE --- */
+        html { height: 100%; }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 16px;
+        }
+
+        /* --- NAVBAR ESCRITORIO --- */
+        .navbar-custom {
+            background-color: #000 !important;  /* negro sólido */
+            padding-top: .35rem;
+            padding-bottom: .35rem;
+            height: auto;                       /* permite crecer cuando se despliega el menú */
+        }
+
+        .navbar-custom .container-fluid {
+            align-items: center;
+        }
+
+        /* Logo + texto */
+        .navbar-brand {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .navbar-brand img {
+            max-height: 44px;                  /* ajusta aquí si quieres más o menos */
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin-left: 8px;
+        }
+
+        .navbar-brand span {
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: .03em;
+        }
+
+        /* Enlaces de navegación */
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+            font-size: .95rem;
+            padding: .35rem 1rem !important;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s ease, color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+            background-color: rgba(255,255,255,0.12);
+        }
+
+        /* Botón hamburguesa */
+        .navbar-toggler {
+            border: 1px solid rgba(255,255,255,0.6);
+            margin-right: .75rem;
+            padding: .25rem .5rem;
+            border-radius: .25rem;
+        }
+
+        .navbar-toggler-icon {
+            /* dejamos el icono por defecto de Bootstrap (ya es claro) */
+            filter: none;
+        }
+
+        /* Cuando el menú está desplegado, que tenga fondo y espacio */
+        .navbar-custom .navbar-collapse.show {
+            background-color: #000;
+            padding-bottom: .75rem;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        .container-main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 1000px;
+            margin: 1.5rem auto 2rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #212529;
+            color: #adb5bd;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            font-size: .9rem;
+        }
+
+        /* --- RESPONSIVE (MÓVIL) --- */
+        @media (max-width: 992px) {
+
+            body {
+                font-size: 17px;
+            }
+
+            .navbar-brand img {
+                max-height: 32px;
+            }
+
+            /* Fondo negro también para el bloque colapsado */
+            .navbar-custom .navbar-collapse {
+                background-color: #000;
+                margin-top: .25rem;
+            }
+
+            /* Enlaces grandes y fáciles de pulsar */
+            .navbar-nav .nav-link {
+                padding: .85rem 1.25rem !important;
+                font-size: 1.05rem;
+                border-top: 1px solid rgba(255,255,255,0.15);
+                color: #fff !important;
+            }
+
+            .container-main {
+                margin: 1rem auto;
+                padding: 1.25rem;
+                width: 95%;
+                border-radius: 4px;
+            }
+
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.5rem; }
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container-fluid">
+
+            <!-- LOGO + TEXTO -->
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/logo.png}" alt="Logo">
+                <span class="fw-bold text-white d-none d-sm-inline">LABJC</span>
+            </a>
+
+            <!-- BOTÓN HAMBURGUESA -->
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuPrincipal"
+                    aria-controls="menuPrincipal"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- MENÚ -->
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Bienvenida</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/blog}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/descargas}">Descargas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contacto}">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+
+<div class="container-main">
+    <div th:fragment="content"></div>
+</div>
+
+<footer th:fragment="footer">
+    <p>&copy; 2025 labjc.es</p>
+    <p class="mb-0">
+        <strong>Contacto:</strong>
+        <a href="mailto:contacto@labjc.es" class="text-light text-decoration-underline">
+            contacto@labjc.es
+        </a>
+    </p>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</footer>
+
+</body>
+</html>
