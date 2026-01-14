@@ -13,10 +13,10 @@
   <description>Página personal de Juan Carlos (labjc.es)</description>
   
   <properties>
-    <java.version>21</java.version>
+    <java.version>17</java.version>
     <spring.boot.version>3.3.5</spring.boot.version>
-    <!-- Fuerza compilación a Java 21 -->
-    <maven.compiler.release>21</maven.compiler.release>
+    <!-- Fuerza compilación a Java 17 para poder automatizar desde el servidof. -->
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
