@@ -2,29 +2,14 @@ name: Deploy (self-hosted)
 
 on:
   push:
-    branches: ["main"]
-
-defaults:
-  run:
-    shell: bash
-    working-directory: ${{ github.workspace }}
+    branches: [ "main" ]
 
 jobs:
   deploy:
     runs-on: self-hosted
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Debug (paths)
-        run: |
-          set -euxo pipefail
-          echo "PWD=$(pwd)"
-          echo "GITHUB_WORKSPACE=${GITHUB_WORKSPACE}"
-          echo "HOME=${HOME}"
-          id
-          ls -la
 
       - name: Build
         run: |
@@ -37,14 +22,15 @@ jobs:
           JAR_FILE="$(ls -1 target/*.jar | grep -v '\.original$' | head -n 1)"
           echo "Jar: $JAR_FILE"
           test -f "$JAR_FILE"
-          cp -f "$JAR_FILE" /home/juancarlos/app/labjc.jar
-          ls -la /home/juancarlos/app/labjc.jar
+
+          sudo install -d -m 755 /opt/labjc
+          sudo install -m 664 "$JAR_FILE" /opt/labjc/labjc.jar
+          ls -la /opt/labjc/labjc.jar
 
       - name: Restart service
         run: |
           set -euxo pipefail
-          sudo /bin/systemctl daemon-reload || true
-          sudo /bin/systemctl restart labjc.service
-          sudo /bin/systemctl --no-pager -l status labjc.service
-
+          sudo systemctl daemon-reload || true
+          sudo systemctl restart labjc.service
+          sudo systemctl --no-pager -l status labjc.service
 
