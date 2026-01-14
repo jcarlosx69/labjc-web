@@ -8,5 +8,22 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Deploy
-        run: /home/juancarlos/deploy-labjc.sh
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: mvn -B clean package -DskipTests
+
+      - name: Publish JAR
+        run: |
+          JAR_FILE="$(ls -1 target/*.jar | grep -v '\.original$' | head -n 1)"
+          echo "Jar: $JAR_FILE"
+          test -f "$JAR_FILE"
+          cp "$JAR_FILE" /home/juancarlos/app/labjc.jar
+
+      - name: Restart service
+        run: |
+          sudo systemctl daemon-reload || true
+          sudo systemctl restart labjc.service
+          sudo systemctl --no-pager -l status labjc.service
+
