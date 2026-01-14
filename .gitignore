@@ -28,3 +28,9 @@ dist/
 build/
 .cache/
 sync.ffs_db
+
+# Frontend: no versionar runtime ni dependencias
+frontend/node/
+frontend/**/node_modules/
+*.exe
+*.cmd
