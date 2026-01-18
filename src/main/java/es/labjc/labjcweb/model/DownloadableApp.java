@@ -16,7 +16,7 @@ public class DownloadableApp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String appName; // Nombre de tu app (ej. "MiUtilidad v1.0")
+    private String appName; // Nombre de la app (ej. "MiUtilidad v1.0")
     private String description; // Descripción corta
 
     // Nombre real del archivo en el servidor (ej. "mi_utilidad.zip")
