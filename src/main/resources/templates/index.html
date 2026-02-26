@@ -1,91 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title th:replace="~{layout :: title}">Bienvenida</title>
     <style th:replace="~{layout :: style}"></style>
-</head>
-<body>
+  </head>
+  <body>
+    <header th:replace="~{layout :: header}"></header>
 
-<header th:replace="~{layout :: header}"></header>
+    <div class="container-main">
+      <section class="mb-5">
+        <div class="row g-4 align-items-stretch">
+          <!-- HERO -->
+          <div class="col-12 col-lg-8">
+            <div class="h-100 p-4 p-md-5 bg-light rounded-3 border shadow-sm">
+              <h1 class="display-6 fw-bold mb-3 text-dark">
+                De la madera al código
+              </h1>
+              <p
+                class="mb-4 text-muted"
+                style="font-size: 1.1em; line-height: 1.6"
+              >
+                Hola, soy Juan Carlos, un
+                <strong>carpintero reciclado a desarrollador Java</strong>.
+                Antes construía muebles; ahora construyo
+                <strong>software</strong>. Este sitio es mi
+                <strong>laboratorio digital</strong> donde experimento con Java
+                y Spring Boot.
+              </p>
 
-<div class="container-main">
+              <div class="d-grid gap-3 d-md-flex justify-content-md-start">
+                <a class="btn btn-primary btn-lg px-4" th:href="@{/blog}"
+                  >Ver mis notas</a
+                >
+                <a
+                  class="btn btn-outline-dark btn-lg px-4"
+                  th:href="@{/descargas}"
+                  >Ver mis apps</a
+                >
 
-    <section class="p-4 p-md-5 mb-5 bg-light rounded-3 border">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h1 class="display-6 fw-bold mb-3 text-dark">De la madera al código</h1>
-                <p class="mb-4 text-muted" style="font-size: 1.1em; line-height: 1.6;">
-                    Hola, soy Juan Carlos, un <strong>carpintero reciclado a desarrollador Java</strong>.
-                    Antes construía muebles; ahora construyo <strong>software</strong>.
-                    Este sitio es mi <strong>laboratorio digital</strong> donde experimento con Java y Spring Boot.
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary btn-lg px-4"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalProyecto"
+                >
+                  Sobre este proyecto
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- STACK CARD -->
+          <div class="col-12 col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+              <div
+                class="card-body p-4 d-flex flex-column justify-content-center text-center"
+              >
+                <p class="text-uppercase small fw-bold text-muted mb-3">
+                  Stack Principal
                 </p>
-                <div class="d-grid gap-3 d-md-flex justify-content-md-start">
-                    <a class="btn btn-primary btn-lg px-4" th:href="@{/blog}">
-                        Ver mis notas
-                    </a>
-                    <a class="btn btn-outline-dark btn-lg px-4" th:href="@{/descargas}">
-                        Ver mis apps
-                    </a>
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                  <span class="badge bg-dark p-2">Java</span>
+                  <span class="badge bg-success p-2">Spring Boot</span>
+                  <span class="badge bg-secondary p-2">MariaDB</span>
+                  <span class="badge bg-info text-dark p-2">Linux</span>
                 </div>
-            </div>
 
-            <div class="col-lg-4 mt-4 mt-lg-0 text-center">
-                <div class="p-3">
-                    <p class="text-uppercase small fw-bold text-muted mb-3">Stack Principal</p>
-                    <div class="d-flex flex-wrap justify-content-center gap-2">
-                        <span class="badge bg-dark p-2">Java</span>
-                        <span class="badge bg-success p-2">Spring Boot</span>
-                        <span class="badge bg-secondary p-2">MariaDB</span>
-                        <span class="badge bg-info text-dark p-2">Linux</span>
-                    </div>
+                <hr class="my-4" />
+
+                <div class="small text-muted">
+                  Diseño con <strong>Bootstrap 5</strong>, responsive y con
+                  animaciones.
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <section class="mb-4">
+      <section class="mb-4">
         <div class="row g-4">
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow-sm border-0 bg-light">
-                    <div class="card-body p-4">
-                        <h2 class="h4 fw-bold mb-3">📖 Blog</h2>
-                        <p class="card-text text-muted">
-                            Mis apuntes, pruebas y errores del día a día.
-                        </p>
-                        <a class="text-decoration-none fw-bold" th:href="@{/blog}">Ir al blog &rarr;</a>
-                    </div>
-                </div>
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+              <div class="card-body p-4">
+                <h2 class="h4 fw-bold mb-3">📖 Blog</h2>
+                <p class="card-text text-muted">
+                  Mis apuntes, pruebas y errores del día a día.
+                </p>
+                <a class="text-decoration-none fw-bold" th:href="@{/blog}"
+                  >Ir al blog &rarr;</a
+                >
+              </div>
             </div>
+          </div>
 
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow-sm border-0 bg-light">
-                    <div class="card-body p-4">
-                        <h2 class="h4 fw-bold mb-3">💾 Descargas</h2>
-                        <p class="card-text text-muted">
-                            Herramientas y aplicaciones creadas con Java.
-                        </p>
-                        <a class="text-decoration-none fw-bold" th:href="@{/descargas}">Ver apps &rarr;</a>
-                    </div>
-                </div>
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+              <div class="card-body p-4">
+                <h2 class="h4 fw-bold mb-3">💾 Descargas</h2>
+                <p class="card-text text-muted">
+                  Herramientas y aplicaciones creadas con Java.
+                </p>
+                <a class="text-decoration-none fw-bold" th:href="@{/descargas}"
+                  >Ver apps &rarr;</a
+                >
+              </div>
             </div>
+          </div>
 
-            <div class="col-12 col-md-4">
-                <div class="card h-100 shadow-sm border-0 bg-light">
-                    <div class="card-body p-4">
-                        <h2 class="h4 fw-bold mb-3">👋 Contacto</h2>
-                        <p class="card-text text-muted">
-                            ¿Tienes alguna idea o sugerencia?
-                        </p>
-                        <a class="text-decoration-none fw-bold" th:href="@{/contacto}">Escribirme &rarr;</a>
-                    </div>
-                </div>
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+              <div class="card-body p-4">
+                <h2 class="h4 fw-bold mb-3">👋 Contacto</h2>
+                <p class="card-text text-muted">
+                  ¿Tienes alguna idea o sugerencia?
+                </p>
+                <a class="text-decoration-none fw-bold" th:href="@{/contacto}"
+                  >Escribirme &rarr;</a
+                >
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-
-</div>
-
-<footer th:replace="~{layout :: footer}"></footer>
-
-</body>
+      </section>
+    </div>
+    <!-- Modal Bootstrap -->
+    <div
+      class="modal fade"
+      id="modalProyecto"
+      tabindex="-1"
+      aria-labelledby="modalProyectoLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalProyectoLabel">Sobre labjc.es</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Este proyecto ha sido desarrollado con
+              <strong>Java y Spring Boot</strong>, desplegado en un servidor
+              propio con <strong>Cloudflare Tunnel</strong> y mejorado
+              visualmente utilizando <strong>Bootstrap 5</strong>.
+            </p>
+            <p class="mb-0 text-muted small">
+              Forma parte de mi evolución profesional del mundo de la
+              carpintería al desarrollo de software.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="~{layout :: footer}"></footer>
+  </body>
 </html>
