@@ -1,82 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:replace="~{layout :: title}">Contacto</title>
     <style th:replace="~{layout :: style}"></style>
-</head>
-<body>
-<header th:replace="~{layout :: header}"></header>
+  </head>
+  <body>
+    <header th:replace="~{layout :: header}"></header>
 
-<div class="container py-5">
+    <div class="container py-5">
+      <h1 class="mb-4">Contacto</h1>
 
-    <h1 class="mb-4">Contacto</h1>
+      <p class="lead mb-4">
+        Si quieres ponerte en contacto conmigo, proponer una colaboración o
+        simplemente comentar algún proyecto, completa el siguiente formulario.
+        Estaré encantado de leerte.
+      </p>
 
-    <p class="lead mb-4">
-        Si quieres ponerte en contacto conmigo, proponer una colaboración o simplemente comentar algún proyecto,
-        completa el siguiente formulario. Estaré encantado de leerte.
-    </p>
-
-    <!-- Bloque de datos de contacto directos -->
-    <div class="mb-4 p-3 border rounded-3 bg-light">
+      <!-- Bloque de datos de contacto directos -->
+      <div class="mb-4 p-3 border rounded-3 bg-light">
         <h2 class="h5 mb-2">Dirección de contacto directa</h2>
         <p class="mb-1">
-            <strong>Email:</strong>
-            <a href="mailto:contacto@labjc.es">contacto@labjc.es</a>
+          <strong>Email:</strong>
+          <a href="mailto:contacto@labjc.es">contacto@labjc.es</a>
         </p>
         <p class="mb-0 small text-muted">
-            Puedes escribirme directamente a este correo o usar el formulario de abajo.
+          Puedes escribirme directamente a este correo o usar el formulario de
+          abajo.
         </p>
-    </div>
+      </div>
 
-    <form th:action="@{/contacto}"
-          th:object="${contactMessage}"
-          method="post"
-          class="mx-auto"
-          style="max-width: 600px;">
-
+      <form
+        th:action="@{/contacto}"
+        th:object="${contactMessage}"
+        method="post"
+        class="mx-auto"
+        style="max-width: 600px"
+      >
         <!-- CSRF solo si está disponible -->
-<!--        <input type="hidden"-->
-<!--               th:if="${_csrf != null}"-->
-<!--               th:name="${_csrf.parameterName}"-->
-<!--               th:value="${_csrf.token}" />-->
+        <!--        <input type="hidden"-->
+        <!--               th:if="${_csrf != null}"-->
+        <!--               th:name="${_csrf.parameterName}"-->
+        <!--               th:value="${_csrf.token}" />-->
 
         <div class="mb-3">
-            <label for="senderName" class="form-label">Tu Nombre</label>
-            <input type="text" id="senderName"
-                   class="form-control"
-                   th:field="*{senderName}"
-                   placeholder="Escribe tu nombre"
-                   required>
+          <label for="senderName" class="form-label">Tu Nombre</label>
+          <input
+            type="text"
+            id="senderName"
+            class="form-control"
+            th:field="*{senderName}"
+            placeholder="Escribe tu nombre"
+            required
+          />
         </div>
 
         <div class="mb-3">
-            <label for="senderEmail" class="form-label">Tu Email</label>
-            <input type="email" id="senderEmail"
-                   class="form-control"
-                   th:field="*{senderEmail}"
-                   placeholder="nombre@ejemplo.com"
-                   required>
+          <label for="senderEmail" class="form-label">Tu Email</label>
+          <input
+            type="email"
+            id="senderEmail"
+            class="form-control"
+            th:field="*{senderEmail}"
+            placeholder="nombre@ejemplo.com"
+            required
+          />
         </div>
 
         <div class="mb-4">
-            <label for="message" class="form-label">Tu Mensaje</label>
-            <textarea id="message"
-                      class="form-control"
-                      rows="5"
-                      th:field="*{message}"
-                      placeholder="Escribe tu mensaje aquí..."
-                      required></textarea>
+          <label for="message" class="form-label">Tu Mensaje</label>
+          <textarea
+            id="message"
+            class="form-control"
+            rows="5"
+            th:field="*{message}"
+            placeholder="Escribe tu mensaje aquí..."
+            required
+          ></textarea>
         </div>
 
         <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg px-5">Enviar Mensaje</button>
+          <button type="submit" class="btn btn-primary btn-lg px-5">
+            Enviar Mensaje
+          </button>
         </div>
-    </form>
+      </form>
+    </div>
 
-
-
-</div>
-
-<footer th:replace="~{layout :: footer}"></footer>
-</body>
+    <footer th:replace="~{layout :: footer}"></footer>
+  </body>
 </html>

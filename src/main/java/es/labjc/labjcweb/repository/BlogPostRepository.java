@@ -4,7 +4,7 @@ import es.labjc.labjcweb.model.BlogPost;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository // no estrictamente necesario
+@Repository // Buena práctica, aunque no estrictamente necesario
 public interface BlogPostRepository extends JpaRepository<BlogPost, Long> {
     // JpaRepository<TipoDeEntidad, TipoDelId>
 

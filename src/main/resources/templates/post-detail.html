@@ -1,45 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${post.title}">Detalle del Post</title>
     <style th:replace="~{layout :: style}"></style>
-</head>
-<body>
-<header th:replace="~{layout :: header}"></header>
+  </head>
+  <body>
+    <header th:replace="~{layout :: header}"></header>
 
-<div class="container py-5">
-
-    <!-- Detalle del post -->
-    <article th:if="${post != null}" class="mx-auto" style="max-width: 800px;">
+    <div class="container py-5">
+      <!-- Detalle del post -->
+      <article th:if="${post != null}" class="mx-auto" style="max-width: 800px">
         <header class="mb-3">
-            <h1 class="mb-2" th:text="${post.title}">Título del post</h1>
-            <p class="text-muted mb-0">
-                <time th:datetime="${post.createdAt}"
-                      th:text="${#temporals.format(post.createdAt, 'dd MMMM, yyyy')}">
-                    01 enero, 2025
-                </time>
-            </p>
+          <h1 class="mb-2" th:text="${post.title}">Título del post</h1>
+          <p class="text-muted mb-0">
+            <time
+              th:datetime="${post.createdAt}"
+              th:text="${#temporals.format(post.createdAt, 'dd MMMM, yyyy')}"
+            >
+              01 enero, 2025
+            </time>
+          </p>
         </header>
 
         <section class="mt-4" th:utext="${post.content}">
-            <!-- Contenido HTML del post -->
+          <!-- Contenido HTML del post -->
         </section>
 
         <nav class="mt-5">
-            <a th:href="@{/blog}" class="btn btn-outline-primary">← Volver al Blog</a>
+          <a th:href="@{/blog}" class="btn btn-outline-primary"
+            >← Volver al Blog</a
+          >
         </nav>
-    </article>
+      </article>
 
-    <!-- Estado: post no encontrado -->
-    <div th:if="${post == null}" class="text-center">
+      <!-- Estado: post no encontrado -->
+      <div th:if="${post == null}" class="text-center">
         <h1 class="mb-3">Post no encontrado</h1>
-        <p class="text-muted mb-4">La entrada que buscas no existe o puede haber sido movida.</p>
+        <p class="text-muted mb-4">
+          La entrada que buscas no existe o puede haber sido movida.
+        </p>
         <a th:href="@{/blog}" class="btn btn-primary">← Volver al Blog</a>
+      </div>
     </div>
 
-</div>
-
-
-<footer th:replace="~{layout :: footer}"></footer>
-</body>
+    <footer th:replace="~{layout :: footer}"></footer>
+  </body>
 </html>

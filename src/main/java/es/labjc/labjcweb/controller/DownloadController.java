@@ -26,8 +26,8 @@ public class DownloadController {
     @Autowired
     private DownloadService downloadService;
 
-    // Ruta para guardar archivos (dentro del proyecto)
-    // EJ: src/main/resources/static/files/app.zip
+    // Ruta donde se guardarán los archivos (dentro del proyecto)
+    // EJ: src/main/resources/static/files/tu_app.zip
     private static final String FILE_DIRECTORY = "static/files/";
 
 

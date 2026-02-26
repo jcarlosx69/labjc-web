@@ -1,52 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:replace="~{layout :: title}">Descargas</title>
     <style th:replace="~{layout :: style}"></style>
+  </head>
+  <body>
+    <header th:replace="~{layout :: header}"></header>
 
-</head>
-<body>
-<header th:replace="~{layout :: header}"></header>
-
-<div class="container py-5">
-
-    <header class="mb-4">
+    <div class="container py-5">
+      <header class="mb-4">
         <h1 class="mb-2">Descargas</h1>
         <h3 class="text-muted">
-            Descargas Totales: <span th:text="${totalDownloads}">0</span>
+          Descargas Totales: <span th:text="${totalDownloads}">0</span>
         </h3>
-    </header>
+      </header>
 
-    <!-- Mensaje si no hay apps -->
-    <p class="text-muted" th:if="${apps.isEmpty()}">
+      <!-- Mensaje si no hay apps -->
+      <p class="text-muted" th:if="${apps.isEmpty()}">
         Aún no hay aplicaciones disponibles para descargar.
-    </p>
+      </p>
 
-    <!-- Listado de apps -->
-    <section class="row gy-4" th:if="${!apps.isEmpty()}">
+      <!-- Listado de apps -->
+      <section class="row gy-4" th:if="${!apps.isEmpty()}">
         <div class="col-12 col-md-10 col-lg-8" th:each="app : ${apps}">
-            <article class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h2 class="h4 mb-2" th:text="${app.appName}">Nombre de la aplicación</h2>
-                    <p class="mb-3" th:text="${app.description}">
-                        Descripción breve de la aplicación y sus características principales.
-                    </p>
-                    <p class="text-muted mb-4">
-                        Descargas: <strong th:text="${app.downloadCount}">0</strong>
-                    </p>
-                    <a class="btn btn-primary"
-                       th:href="@{/descargar/{id}(id=${app.id})}"
-                       aria-label="Descargar [[${app.appName}]]">
-                        ⬇ Descargar
-                    </a>
-                </div>
-            </article>
+          <article class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h2 class="h4 mb-2" th:text="${app.appName}">
+                Nombre de la aplicación
+              </h2>
+              <p class="mb-3" th:text="${app.description}">
+                Descripción breve de la aplicación y sus características
+                principales.
+              </p>
+              <p class="text-muted mb-4">
+                Descargas: <strong th:text="${app.downloadCount}">0</strong>
+              </p>
+              <a
+                class="btn btn-primary"
+                th:href="@{/descargar/{id}(id=${app.id})}"
+                aria-label="Descargar [[${app.appName}]]"
+              >
+                ⬇ Descargar
+              </a>
+            </div>
+          </article>
         </div>
-    </section>
+      </section>
+    </div>
 
-</div>
-
-
-<footer th:replace="~{layout :: footer}"></footer>
-</body>
+    <footer th:replace="~{layout :: footer}"></footer>
+  </body>
 </html>

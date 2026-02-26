@@ -1,45 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:replace="~{layout :: title}">Blog</title>
     <style th:replace="~{layout :: style}"></style>
-</head>
-<body>
-<header th:replace="~{layout :: header}"></header>
+  </head>
+  <body>
+    <header th:replace="~{layout :: header}"></header>
 
-<div class="container py-5">
+    <div class="container py-5">
+      <h1 class="mb-4">Blog</h1>
 
-    <h1 class="mb-4">Blog</h1>
+      <!-- Mensaje si la lista está vacía -->
+      <p class="text-muted" th:if="${posts.isEmpty()}">
+        Aún no hay entradas en el blog.
+      </p>
 
-    <!-- Mensaje si la lista está vacía -->
-    <p class="text-muted" th:if="${posts.isEmpty()}">Aún no hay entradas en el blog.</p>
-
-    <!-- Listado de entradas -->
-    <div class="row gy-4" th:if="${!posts.isEmpty()}">
+      <!-- Listado de entradas -->
+      <div class="row gy-4" th:if="${!posts.isEmpty()}">
         <div class="col-12 col-md-10 col-lg-8" th:each="post : ${posts}">
-            <article class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h2 class="h4 mb-2">
-                        <a th:href="@{/blog/{id}(id=${post.id})}" class="text-decoration-none">
-                            <span th:text="${post.title}">Título del post</span>
-                        </a>
-                    </h2>
-                    <p class="text-muted mb-3">
-                        <time th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy')}">01/01/2025</time>
-                    </p>
-                    <div>
-                        <a class="btn btn-sm btn-primary" th:href="@{/blog/{id}(id=${post.id})}">
-                            Leer más…
-                        </a>
-                    </div>
-                </div>
-            </article>
+          <article class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h2 class="h4 mb-2">
+                <a
+                  th:href="@{/blog/{id}(id=${post.id})}"
+                  class="text-decoration-none"
+                >
+                  <span th:text="${post.title}">Título del post</span>
+                </a>
+              </h2>
+              <p class="text-muted mb-3">
+                <time
+                  th:text="${#temporals.format(post.createdAt, 'dd/MM/yyyy')}"
+                  >01/01/2025</time
+                >
+              </p>
+              <div>
+                <a
+                  class="btn btn-sm btn-primary"
+                  th:href="@{/blog/{id}(id=${post.id})}"
+                >
+                  Leer más…
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
+      </div>
     </div>
 
-</div>
-
-
-<footer th:replace="~{layout :: footer}"></footer>
-</body>
+    <footer th:replace="~{layout :: footer}"></footer>
+  </body>
 </html>
