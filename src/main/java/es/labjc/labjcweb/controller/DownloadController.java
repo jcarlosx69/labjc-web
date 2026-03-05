@@ -4,7 +4,6 @@ import es.labjc.labjcweb.model.DownloadableApp;
 import es.labjc.labjcweb.repository.DownloadableAppRepository;
 import es.labjc.labjcweb.service.DownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,6 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.PathResource;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,10 +29,10 @@ public class DownloadController {
     @Autowired
     private DownloadService downloadService;
 
-    // Ruta donde se guardarán los archivos (dentro del proyecto)
-    // EJ: src/main/resources/static/files/tu_app.zip
-    private static final String FILE_DIRECTORY = "static/files/";
-
+    // Ruta externa configurable donde se guardan los archivos descargables
+    // Ejemplo: /opt/labjc-web/downloads
+    @Value("${labjc.downloads.path}")
+    private String downloadsPath;
 
     // 1. Muestra la página HTML con la lista de descargas
     @GetMapping("/descargas")
@@ -48,7 +51,6 @@ public class DownloadController {
         return "descargas"; // Devuelve /resources/templates/descargas.html
     }
 
-
     // 2. Maneja la descarga real y el contador
     @GetMapping("/descargar/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable Long id) throws IOException {
@@ -56,9 +58,19 @@ public class DownloadController {
         // 1. Llama al servicio para incrementar el contador y obtener la app
         DownloadableApp app = downloadService.incrementAndGetApp(id);
 
-        // 2. Prepara el archivo para ser descargado
-        // Buscamos el archivo en la carpeta /resources/static/files/
-        Resource resource = new ClassPathResource(FILE_DIRECTORY + app.getFileName());
+        String fileName = app.getFileName();
+
+        // Validación básica del nombre de archivo (evita rutas tipo ../ o separadores)
+        if (fileName == null || fileName.isBlank()
+                || fileName.contains("..")
+                || fileName.contains("/")
+                || fileName.contains("\\")) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        // 2. Prepara el archivo para ser descargado desde carpeta externa
+        Path filePath = Paths.get(downloadsPath, fileName);
+        Resource resource = new PathResource(filePath);
 
         if (!resource.exists()) {
             // Manejo de error si el archivo no existe en el servidor
@@ -68,7 +80,7 @@ public class DownloadController {
         // 3. Prepara la respuesta HTTP
         HttpHeaders headers = new HttpHeaders();
         // Esto le dice al navegador que debe "descargar" el archivo
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + app.getFileName());
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
 
         // 4. Devuelve la respuesta (el archivo)
         return ResponseEntity.ok()
