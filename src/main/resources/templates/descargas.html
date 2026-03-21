@@ -10,12 +10,180 @@
     <header th:replace="~{layout :: header}"></header>
 
     <div class="container py-5">
-      <header class="mb-4">
-        <h1 class="mb-2">Descargas</h1>
-        <h3 class="text-muted">
-          Descargas Totales: <span th:text="${totalDownloads}">0</span>
-        </h3>
+      <header class="mb-4 d-flex flex-wrap align-items-center gap-3">
+        <div>
+          <h1 class="mb-1">Descargas</h1>
+          <h3 class="text-muted mb-0">
+            Descargas Totales: <span th:text="${totalDownloads}">0</span>
+          </h3>
+        </div>
+
+        <!-- Botón que abre el modal de ayuda de instalación -->
+        <button
+          type="button"
+          class="btn btn-success ms-auto fw-bold shadow-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#modalInstall"
+        >
+          📲 ¿Cómo instalar?
+        </button>
       </header>
+
+      <!-- =============================================
+     MODAL: Guía de instalación en Android
+     ============================================= -->
+      <div
+        class="modal fade"
+        id="modalInstall"
+        tabindex="-1"
+        aria-labelledby="modalInstallLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content shadow">
+            <!-- Cabecera del modal -->
+            <div class="modal-header bg-dark text-white">
+              <h5 class="modal-title" id="modalInstallLabel">
+                📲 Guía de instalación en Android
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+
+            <div class="modal-body px-4 py-3">
+              <!-- AVISO DE SEGURIDAD -->
+              <div
+                class="alert alert-success d-flex gap-2 align-items-start mb-4"
+                role="alert"
+              >
+                <span style="font-size: 1.4rem">🔒</span>
+                <div>
+                  <strong>Aplicación de confianza</strong>
+                  <p class="mb-0 small">
+                    Estas apps han sido desarrolladas por Juan Carlos (labjc.es)
+                    con fines educativos. No contienen publicidad, rastreadores
+                    ni acceso a datos personales. Puedes instalarlas con total
+                    seguridad.
+                  </p>
+                </div>
+              </div>
+
+              <!-- PASOS DE INSTALACIÓN -->
+              <h6
+                class="fw-bold text-uppercase text-muted mb-3"
+                style="font-size: 0.8rem; letter-spacing: 0.05em"
+              >
+                Pasos para instalar el APK
+              </h6>
+
+              <ol class="list-group list-group-flush mb-3">
+                <!-- Paso 1 -->
+                <li
+                  class="list-group-item d-flex gap-3 align-items-start px-0 py-3"
+                >
+                  <span
+                    class="badge rounded-pill bg-dark d-flex align-items-center justify-content-center"
+                    style="min-width: 2rem; height: 2rem; font-size: 0.9rem"
+                    >1</span
+                  >
+                  <div>
+                    <strong>⬇ Descarga el archivo APK</strong>
+                    <p class="mb-0 text-muted small">
+                      Pulsa el botón <em>"Descargar"</em> de la app que quieras
+                      instalar. El archivo <code>.apk</code> se guardará en la
+                      carpeta de <strong>Descargas</strong> de tu dispositivo.
+                    </p>
+                  </div>
+                </li>
+
+                <!-- Paso 2 -->
+                <li
+                  class="list-group-item d-flex gap-3 align-items-start px-0 py-3"
+                >
+                  <span
+                    class="badge rounded-pill bg-dark d-flex align-items-center justify-content-center"
+                    style="min-width: 2rem; height: 2rem; font-size: 0.9rem"
+                    >2</span
+                  >
+                  <div>
+                    <strong
+                      >🔓 Permite la instalación desde fuentes
+                      desconocidas</strong
+                    >
+                    <p class="mb-0 text-muted small">
+                      Android bloqueará la instalación por defecto. Cuando
+                      aparezca el aviso, pulsa <em>"Configuración"</em> y activa
+                      <em>"Permitir de esta fuente"</em>. Este permiso solo
+                      aplica al navegador que usaste para descargar.
+                    </p>
+                  </div>
+                </li>
+
+                <!-- Paso 3 -->
+                <li
+                  class="list-group-item d-flex gap-3 align-items-start px-0 py-3"
+                >
+                  <span
+                    class="badge rounded-pill bg-dark d-flex align-items-center justify-content-center"
+                    style="min-width: 2rem; height: 2rem; font-size: 0.9rem"
+                    >3</span
+                  >
+                  <div>
+                    <strong>📂 Abre el archivo descargado</strong>
+                    <p class="mb-0 text-muted small">
+                      Ve a tu gestor de archivos o a la barra de notificaciones
+                      y pulsa sobre el archivo <code>.apk</code>. Se iniciará el
+                      asistente de instalación.
+                    </p>
+                  </div>
+                </li>
+
+                <!-- Paso 4 -->
+                <li
+                  class="list-group-item d-flex gap-3 align-items-start px-0 py-3"
+                >
+                  <span
+                    class="badge rounded-pill bg-dark d-flex align-items-center justify-content-center"
+                    style="min-width: 2rem; height: 2rem; font-size: 0.9rem"
+                    >4</span
+                  >
+                  <div>
+                    <strong>✅ Confirma e instala</strong>
+                    <p class="mb-0 text-muted small">
+                      Pulsa <em>"Instalar"</em> en el asistente. En unos
+                      segundos la app estará disponible en tu dispositivo, lista
+                      para usar.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+
+              <!-- NOTA FINAL -->
+              <p class="text-muted small mb-0">
+                💡 <strong>Consejo:</strong> Si tienes dudas o la instalación
+                falla, escríbeme a
+                <a href="mailto:contacto@labjc.es">contacto@labjc.es</a>
+                e intento ayudarte.
+              </p>
+            </div>
+
+            <!-- Pie del modal -->
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="alert alert-info mt-4" role="alert">
         <h5 class="mb-2">Información sobre las apps de test (SCS)</h5>
@@ -24,7 +192,8 @@
           como
           <strong>
             ayuda para la preparación de oposiciones del Servicio Canario de la
-            Salud (SCS) </strong>.
+            Salud (SCS) </strong
+          >.
         </p>
         <p class="mb-0">
           El

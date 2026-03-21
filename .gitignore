@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Perfil local con credenciales de desarrollo (no subir al repositorio)
+src/main/resources/application-local.properties
