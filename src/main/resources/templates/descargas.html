@@ -209,6 +209,97 @@
         </p>
       </div>
 
+      <!-- =============================================
+           SECCIÓN NOVEDADES
+           Actualizar o eliminar cuando dejen de ser novedad
+           ============================================= -->
+      <section class="mt-5 mb-4">
+        <h2 class="h4 fw-bold mb-3 border-bottom pb-2">
+          🆕 Novedades
+        </h2>
+
+        <!-- Aviso general de novedades -->
+        <div class="alert alert-warning d-flex gap-2 align-items-start mb-4" role="alert">
+          <span style="font-size: 1.4rem;">⚡</span>
+          <div>
+            <strong>Nuevas versiones más ligeras disponibles</strong>
+            <p class="mb-0 small">
+              Se han publicado versiones reducidas de algunas apps de test.
+              Las versiones anteriores <strong>siguen disponibles</strong> en el listado
+              y no son sustituidas. Puedes instalar ambas sin problema.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tarjetas de novedades -->
+        <div class="row gy-3">
+
+          <!-- Novedad 1: Celador -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-warning">
+              <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between align-items-center">
+                <span class="fw-bold">Celador Test</span>
+                <span class="badge bg-warning text-dark">Nuevo</span>
+              </div>
+              <div class="card-body">
+                <p class="small text-muted mb-3">
+                  Versión más ligera del test de Celador.
+                  La versión anterior <strong>sigue disponible</strong> en el listado.
+                </p>
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{/descargar/{id}(id=9)}"
+                   aria-label="Descargar Celador Test">
+                  ⬇ Descargar
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Novedad 2: Auxiliar de Enfermería -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-warning">
+              <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between align-items-center">
+                <span class="fw-bold">Auxiliar de Enfermería Test</span>
+                <span class="badge bg-warning text-dark">Nuevo</span>
+              </div>
+              <div class="card-body">
+                <p class="small text-muted mb-3">
+                  Versión más ligera del test de Auxiliar de Enfermería.
+                  La versión anterior <strong>sigue disponible</strong> en el listado.
+                </p>
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{/descargar/{id}(id=10)}"
+                   aria-label="Descargar Auxiliar de Enfermería Test">
+                  ⬇ Descargar
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Novedad 3: Auxiliar Administrativo -->
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-warning">
+              <div class="card-header bg-warning bg-opacity-10 d-flex justify-content-between align-items-center">
+                <span class="fw-bold">Auxiliar Administrativo Test</span>
+                <span class="badge bg-warning text-dark">Nuevo</span>
+              </div>
+              <div class="card-body">
+                <p class="small text-muted mb-3">
+                  Versión más ligera del test de Auxiliar Administrativo.
+                  La versión anterior <strong>sigue disponible</strong> en el listado.
+                </p>
+                <a class="btn btn-sm btn-warning"
+                   th:href="@{/descargar/{id}(id=11)}"
+                   aria-label="Descargar Auxiliar Administrativo Test">
+                  ⬇ Descargar
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- Mensaje si no hay apps -->
       <p class="text-muted" th:if="${apps.isEmpty()}">
         Aún no hay aplicaciones disponibles para descargar.
