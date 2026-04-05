@@ -3,10 +3,38 @@ name: Deploy (self-hosted)
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: 
+  workflow_dispatch:
+
 jobs:
+
+  test:
+    name: Batería de pruebas automatizadas
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Ejecutar todos los tests
+        run: mvn -B test -Dspring.profiles.active=test
+
+      - name: Publicar resultados JUnit
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: '**/target/surefire-reports/TEST-*.xml'
+          check_name: 'Resultados JUnit'
+
   deploy:
+    name: Despliegue en servidor
     runs-on: self-hosted
+    needs: test   # ← BLOQUEA el deploy si los tests fallan
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +50,6 @@ jobs:
           JAR_FILE="$(ls -1 target/*.jar | grep -v '\.original$' | head -n 1)"
           echo "Jar: $JAR_FILE"
           test -f "$JAR_FILE"
-
           sudo install -d -m 755 /opt/labjc
           sudo install -m 664 "$JAR_FILE" /opt/labjc/labjc.jar
           ls -la /opt/labjc/labjc.jar
@@ -33,4 +60,3 @@ jobs:
           sudo systemctl daemon-reload || true
           sudo systemctl restart labjc.service
           sudo systemctl --no-pager -l status labjc.service
-
