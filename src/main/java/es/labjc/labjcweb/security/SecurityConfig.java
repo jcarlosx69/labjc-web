@@ -40,7 +40,8 @@ public class SecurityConfig {
 
                 // ✅ Rutas públicas de la web Thymeleaf — sin cambios
                 .requestMatchers("/", "/blog/**", "/descargas/**",
-                                 "/descargar/**", "/contacto/**").permitAll()
+                 "/descargar/**", "/contacto/**",
+                 "/contacto-exito").permitAll()
 
                 // ✅ Recursos estáticos (CSS, JS, imágenes)
                 .requestMatchers("/css/**", "/js/**", "/images/**",
