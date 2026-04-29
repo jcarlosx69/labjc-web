@@ -23,6 +23,8 @@ import es.labjc.labjcweb.model.DownloadableApp;
 import es.labjc.labjcweb.repository.DownloadableAppRepository;
 import es.labjc.labjcweb.service.DownloadService;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -80,7 +82,7 @@ class DownloadControllerMvcTest {
     void descargar_idInexistente_lanzaExcepcion() {
         // El controlador no tiene @ExceptionHandler, así que la excepción
         // se propaga. Verificamos que efectivamente se lanza.
-        when(downloadService.incrementAndGetApp(anyLong()))
+        when(downloadService.incrementAndGetApp(anyLong(), anyString()))
                 .thenThrow(new IllegalArgumentException("App no encontrada con ID: 9999"));
 
         assertThrows(Exception.class, () -> mockMvc.perform(get("/descargar/9999")));
@@ -94,7 +96,7 @@ class DownloadControllerMvcTest {
         appMaliciosa.setId(2L);
         appMaliciosa.setFileName("../../etc/passwd");
 
-        when(downloadService.incrementAndGetApp(2L))
+        when(downloadService.incrementAndGetApp(eq(2L), anyString()))
                 .thenReturn(appMaliciosa);
 
         mockMvc.perform(get("/descargar/2"))
