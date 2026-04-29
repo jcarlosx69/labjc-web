@@ -49,10 +49,20 @@ public class DownloadController {
     // 2. Maneja la descarga real, el contador y el registro del log
     @GetMapping("/descargar/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable Long id,
-                                                  HttpServletRequest request) throws IOException {
+            HttpServletRequest request) throws IOException {
 
         // Obtiene la IP del cliente para registrarla en el log
-        String ipAddress = request.getRemoteAddr();
+        // Cloudflare envía la IP real del usuario en el header X-Forwarded-For
+        // Si no está disponible (acceso directo), se usa getRemoteAddr() como fallback
+        String ipAddress = request.getHeader("X-Forwarded-For");
+        if (ipAddress == null || ipAddress.isBlank()) {
+            ipAddress = request.getRemoteAddr();
+        } else {
+            // X-Forwarded-For puede contener varias IPs separadas por coma (proxies
+            // encadenados)
+            // La primera siempre es la del cliente original
+            ipAddress = ipAddress.split(",")[0].trim();
+        }
 
         // Incrementa contador, registra log y obtiene la app
         DownloadableApp app = downloadService.incrementAndGetApp(id, ipAddress);
