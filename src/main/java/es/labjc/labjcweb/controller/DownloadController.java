@@ -64,6 +64,11 @@ public class DownloadController {
             ipAddress = ipAddress.split(",")[0].trim();
         }
 
+        // Filtra bots conocidos por User-Agent para no contaminar las estadísticas
+        String userAgent = request.getHeader("User-Agent");
+        if(userAgent != null && userAgent.toLowerCase().contains("bot")){
+            return ResponseEntity.status(403).build();
+        }
         // Incrementa contador, registra log y obtiene la app
         DownloadableApp app = downloadService.incrementAndGetApp(id, ipAddress);
 
